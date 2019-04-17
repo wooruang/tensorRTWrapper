@@ -41,11 +41,11 @@ find_library(TENSORRT_LIBRARY_INFER_PLUGIN nvinfer_plugin
   PATH_SUFFIXES lib lib64 lib/x64)
 set(TENSORRT_LIBRARY ${TENSORRT_LIBRARY_INFER} ${TENSORRT_LIBRARY_INFER_PLUGIN} ${TENSORRT_LIBRARY_PARSER})
 MESSAGE(STATUS "Find TensorRT libs at ${TENSORRT_LIBRARY}")
+
 find_package_handle_standard_args(
   TENSORRT DEFAULT_MSG TENSORRT_INCLUDE_DIR TENSORRT_LIBRARY)
 if(NOT TENSORRT_FOUND)
-  message(ERROR
-    "Cannot find TensorRT library.")
+  message(FATAL_ERROR "Cannot find TensorRT library.")
 endif()
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -Wall -Ofast -Wfatal-errors -D_MWAITXINTRIN_H_INCLUDED")	# -std=gnu++11
